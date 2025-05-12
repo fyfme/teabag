@@ -33,6 +33,92 @@ button {
 
 h1 {
   font-family: 'Special Gothic Expanded One', sans-serif;
-  font-size: 2.5rem; /* Ukuran font yang lebih besar, sesuaikan dengan kebutuhan */
-  text-align: center; /* Agar teks berada di tengah */
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.message-card {
+  background-color: #ffffff;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: transform 0.3s ease;
+}
+
+.message-card:hover {
+  transform: scale(1.02);
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pagination button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #444;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button.active-page {
+  background-color: #5f3dc4;
+  font-weight: bold;
+  box-shadow: 0 0 5px #5f3dc4;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+
+  .message-card {
+    font-size: 13px;
+  }
+}
+.message-card.highlight {
+  background-color: #ffffff;
+  border-color: #D0F0C0;
+  box-shadow: 0 0 10px #D0F0C0;
+  transition: background-color 0.6s ease, box-shadow 0.6s ease;
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import './App.css';
+import { motion, AnimatePresence } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const CONTRACT_ADDRESS = "0xc3610cC4F6E3f16ba8EcB9C6007c00Deed3B912b";
 const ABI = [
@@ -14,6 +17,13 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [highlightedTimestamp, setHighlightedTimestamp] = useState(null);
+
+  const messagesPerPage = 5;
+  const totalPages = Math.ceil(messages.length / messagesPerPage);
+  const startIndex = (currentPage - 1) * messagesPerPage;
+  const endIndex = currentPage * messagesPerPage;
 
   const placeholders = [
     "Got any thoughts brewing or tea you're making today? Let us know!..",
@@ -26,17 +36,19 @@ function App() {
 
   const connectWallet = async () => {
     if (!window.ethereum) {
-      alert("Welcome To TeaBag!");
+      alert("Never Share Your Personal information Here");
       return;
     }
-
     try {
       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       setAccount(accounts[0]);
     } catch (err) {
-      setStatus("❌ Gagal koneksi wallet");
+      setStatus("❌ Failed to connect wallet");
     }
   };
+useEffect(() => {
+  toast.info("Welcome to TEA BAG!");
+}, []);
 
   const fetchMessages = async () => {
     try {
@@ -46,7 +58,7 @@ function App() {
       setMessages([...msgs].reverse());
     } catch (err) {
       console.error(err);
-      setStatus("❌ Gagal mengambil pesan");
+      setStatus("❌ Failed to fetch messages");
     }
   };
 
@@ -62,11 +74,16 @@ function App() {
       setStatus("⏳ Sending Message...");
       await tx.wait();
       setNewMessage("");
-      setStatus("✅ Success!");
-      fetchMessages();
+      setStatus("✅ Message Sent!");
+      toast.success("🌱 Your TEA has been planted!");
+      await fetchMessages();
+      setCurrentPage(1);
+      setHighlightedTimestamp(Math.floor(Date.now() / 1000));
+      setTimeout(() => setHighlightedTimestamp(null), 4000);
     } catch (err) {
       console.error(err);
-      setStatus("❌ Something Went Wrong");
+      setStatus("❌ Something went wrong");
+      toast.error("Failed to send message.");
     }
   };
 
@@ -80,6 +97,8 @@ function App() {
 
   return (
     <div className="app-container">
+      <ToastContainer position="top-center" />
+
       <h1 className="title">
         <img
           src="https://sepolia.tea.xyz/assets/configs/network_logo.svg"
@@ -88,6 +107,7 @@ function App() {
         />
         TEA BAG
       </h1>
+
       {account ? (
         <>
           <textarea
@@ -102,15 +122,48 @@ function App() {
       ) : (
         <button onClick={connectWallet}>Connect Wallet</button>
       )}
+
       <hr />
       <h2>🍃 New Messages</h2>
-      {messages.map((msg, i) => (
-        <div key={i} className="message-card">
-          <p>{msg.content}</p>
-          <small>👤 {msg.sender}</small><br />
-          <small>🕒 {new Date(msg.timestamp * 1000).toLocaleString()}</small>
-        </div>
-      ))}
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentPage}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.4 }}
+        >
+          {messages.slice(startIndex, endIndex).map((msg, i) => (
+            <motion.div
+              key={i}
+              className={`message-card ${msg.timestamp === highlightedTimestamp ? "highlight" : ""}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <p>{msg.content}</p>
+              <small>👤 {msg.sender}</small><br />
+              <small>🕒 {new Date(msg.timestamp * 1000).toLocaleString()}</small>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          ← Newer
+        </button>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage >= totalPages}
+        >
+          Older →
+        </button>
+      </div>
     </div>
   );
 }
