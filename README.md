@@ -1,70 +1,79 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🫖 TEA BAG
 
-## Available Scripts
+**TEA BAG** is a decentralized forum built on the **TEA Protocol** network. This application allows anyone to express opinions, thoughts, or ideas about the TEA ecosystem freely and openly. All messages are stored on the blockchain, making them transparent and immutable.
 
-In the project directory, you can run:
+## 🚀 Demo
+> [🔗 https://teabag-rose.vercel.app/]
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📚 What is TEA Protocol?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[TEA Protocol](https://tea.xyz/) is a decentralized protocol that rewards open-source software projects based on their impact, without requiring complex tokenomics. With TEA, projects like TEA BAG can earn TEA Rank and potential rewards simply by being OSS (Open Source Software).
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ✨ Key Features
 
-### `npm run build`
+- 💬 Write and read public messages
+- ⛓️ All messages are stored on-chain (TEA Sepolia)
+- 🔐 Wallet authentication (Metamask)
+- 📜 Transparent and open source smart contracts
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend:** React, TailwindCSS, Framer Motion
+- **Smart Contracts:** Solidity, Hardhat
+- **Blockchain:** [TEA Sepolia Testnet](https://sepolia.tea.xyz/)
+- **Web3 Integration:** ethers.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 How to Run the Project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Clone the repository
+```bash
+git clone https://github.com/fyfme/teabag.git
+cd teabag
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3. Start the local development server
+```bash
+npm run dev
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 4. Deploy smart contract (optional)
+```bash
+npx hardhat run scripts/deploy.js --network tea
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🤝 Contributions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We welcome contributions from anyone who wants to help improve, fix, or expand TEA BAG. Feel free to open [Issues](https://github.com/fyfme/teabag/issues) or submit a Pull Request!
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🪪 License
 
-### Analyzing the Bundle Size
+This project is licensed under the [MIT License](./LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧾 OSS Status
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+TEA BAG is an OSS (Open Source Software) project and will be registered on [tea.xyz](https://app.tea.xyz) to gain TEA Rank and recognition from the TEA community.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🙌 Contributors
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [fyfme](https://github.com/fyfme) – Creator and Developer
